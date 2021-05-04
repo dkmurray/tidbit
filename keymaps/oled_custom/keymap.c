@@ -191,6 +191,14 @@ void matrix_init_user(void) {
   register_code(KC_NLCK);
 }
 
+#ifdef RGBLIGHT_ENABLE
+void keyboard_post_init_user(void) {
+  rgblight_enable_noeeprom(); // Enables RGB, without saving settings
+  rgblight_sethsv_noeeprom(213, 128, 128); // should be roughly rgb 0x800080
+  rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+}
+#endif
+
 void matrix_scan_user(void) {
   matrix_scan_remote_kb();
   animation_refresh(animation);
