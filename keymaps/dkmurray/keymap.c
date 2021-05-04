@@ -147,7 +147,7 @@ void matrix_init_user(void) {
   animation->mode = DISP_MODE_BOUNCE;
   animation->enabled = true;
 
-  char tmp[] = "DKM ";
+  char tmp[] = "    ";
   strcpy(message, tmp);
   register_code(KC_NLCK);
 }
@@ -205,7 +205,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
       }
     default: //  for any other layers, or the default layer
       {
-        char tmp[] = "DKM ";
+        char tmp[] = "    ";
         strcpy(message, tmp);
         force_animation_refresh(animation); //force refresh
         break;
