@@ -153,7 +153,7 @@ void oled_task_user(void) {
             break;
         case _SETT:
             oled_write_P(PSTR("SETT\n"), false);
-            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR(" -+ \n"), false);
             oled_write_P(PSTR("_HHM\n"), false);
             oled_write_P(PSTR("TSSM\n"), false);
             oled_write_P(PSTR("pVV_\n"), false);
