@@ -115,22 +115,32 @@ uint8_t current_idle_frame = 0;
 //     }
 
 void oled_task_user(void) {
-    oled_set_cursor(0,1);
+    // oled_set_cursor(0,1);
     render_logo();
     // render_anim();
-    oled_set_cursor(0,6);
+    oled_set_cursor(0,5);
     oled_write_P(PSTR("TROY\nPAD\n"), false);
     oled_write_P(PSTR("-----\n"), false);
     // Host Keyboard Layer Status
     oled_write_P(PSTR("MODE\n"), false);
-    oled_write_P(PSTR("\n"), false);
+    // 
 
     switch (get_highest_layer(layer_state)) {
         case _BASE:
             oled_write_P(PSTR("BASE\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("m789\n"), false);
+            oled_write_P(PSTR("-456\n"), false);
+            oled_write_P(PSTR("+123\n"), false);
+            oled_write_P(PSTR("f0.E\n"), false);
             break;
         case _FUNC:
             oled_write_P(PSTR("FUNC\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("___b\n"), false);
+            oled_write_P(PSTR("/___\n"), false);
+            oled_write_P(PSTR("*___\n"), false);
+            oled_write_P(PSTR("f__P\n"), false);
             break;
     }
 }
