@@ -119,7 +119,7 @@ void oled_task_user(void) {
     render_logo();
     // render_anim();
     oled_set_cursor(0,6);
-    oled_write_P(PSTR("TID\nBIT\n"), false);
+    oled_write_P(PSTR("TROY\nPAD\n"), false);
     oled_write_P(PSTR("-----\n"), false);
     // Host Keyboard Layer Status
     oled_write_P(PSTR("MODE\n"), false);
