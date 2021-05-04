@@ -22,6 +22,7 @@
 
 #define _BASE     0
 #define _FUNC     1
+#define _SETT      2
 
 #define DISP_ADDR 0x70
 HT16K33 *disp;
@@ -54,10 +55,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Function layer (numpad)
   [_FUNC] = LAYOUT(
               _______,   _______,   _______,
-    KC_NO,    RGB_TOG, RGB_MOD, KC_BSPC,
-    KC_PSLS,  RGB_M_P,   RGB_HUI, KC_NO,
-    KC_PAST,  KC_NO,   RGB_SAI, KC_NO,
-    KC_NO,    KC_NO,   RGB_VAI, PROG
+    KC_NO,    KC_NO,    KC_NO, KC_BSPC,
+    KC_PSLS,  KC_NO,    KC_NO, KC_NO,
+    KC_PAST,  KC_NO,    KC_NO, KC_NO,
+    KC_NO,    MO(_SETT),KC_NO, KC_NO
+  ),
+  // Settings layer (numpad)
+  [_SETT] = LAYOUT(
+              _______,   _______,   _______,
+    KC_NO,    RGB_HUD,  RGB_HUI, RGB_MOD,
+    RGB_TOG,  RGB_SAD,  RGB_SAI, RGB_RMOD,
+    RGB_M_P,  RGB_VAD,  RGB_VAI, KC_NO,
+    KC_NO,    KC_NO,    PROG,    KC_NO
   ),
 };
 
@@ -140,7 +149,15 @@ void oled_task_user(void) {
             oled_write_P(PSTR("___b\n"), false);
             oled_write_P(PSTR("/___\n"), false);
             oled_write_P(PSTR("*___\n"), false);
-            oled_write_P(PSTR("f__P\n"), false);
+            oled_write_P(PSTR("_S__\n"), false);
+            break;
+        case _SETT:
+            oled_write_P(PSTR("SETT\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            oled_write_P(PSTR("_HHM\n"), false);
+            oled_write_P(PSTR("TSSM\n"), false);
+            oled_write_P(PSTR("pVV_\n"), false);
+            oled_write_P(PSTR("__P_\n"), false);
             break;
     }
 }
@@ -183,7 +200,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         char tmp[] = "PROG";
         strcpy(message, tmp);
-        force_animation_refresh(animation); //force refresh
+        force_animation_refresh(animation); //force 14-seg refresh
         set_bitc_LED(LED_DIM);
         rgblight_disable_noeeprom();
         bootloader_jump(); //jump to bootloader
@@ -209,6 +226,13 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     case _FUNC:
       {
         char tmp[] = "FUNC";
+        strcpy(message, tmp);
+        force_animation_refresh(animation); //force refresh
+        break;
+      }
+    case _SETT:
+      {
+        char tmp[] = "SETTINGS";
         strcpy(message, tmp);
         force_animation_refresh(animation); //force refresh
         break;
