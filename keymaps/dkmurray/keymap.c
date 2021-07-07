@@ -181,9 +181,9 @@ void matrix_init_user(void) {
 
 #ifdef RGBLIGHT_ENABLE
 void keyboard_post_init_user(void) {
-  rgblight_enable_noeeprom(); // Enables RGB, without saving settings
+  // rgblight_enable_noeeprom(); // Enables RGB, without saving settings
   rgblight_sethsv_noeeprom(213, 128, 128); // should be roughly rgb 0x800080
-  rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+  rgblight_disable_noeeprom();
 }
 #endif
 
